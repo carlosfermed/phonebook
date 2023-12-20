@@ -1,10 +1,7 @@
 const http = require("node:http");
 let contacts = require("./data/data");
-const getList = require("./controllers/getList");
-const deleteContact = require("./util/delete");
-const redirectToMainPage = require("./util/redirect");
-const getContactForm = require("./controllers/getContactForm");
-const saveContact = require("./controllers/postSaveContact");
+const {getList, getContactForm, saveContact} = require("./controllers");
+const {deleteContact, redirectToMainPage} = require("./util");
 
 const PORT = process.env.PORT || 3000;
 
@@ -12,18 +9,18 @@ http.createServer((req, res) => {
 
     const urlParts = req.url.split("/");
 
-    if (urlParts.includes("delete")) {
+    if (urlParts.includes("delete")) {                              // Borrar contacto.
         contacts = deleteContact(contacts, urlParts[2]);
         redirectToMainPage(res);
     }
-    else if (urlParts.includes("new")) {
+    else if (urlParts.includes("new")) {                            // Servir formulario para añadir contacto.
         res.end(getContactForm(contacts));
     }
-    else if (req.url === "/") {
+    else if (req.url === "/") {                                     // Servir página principal.
         res.writeHead(200, "content-type", "text/html");  
         res.end(getList(contacts));
     }
-    else if (urlParts.includes("save") && req.method === "POST") {
+    else if (urlParts.includes("save") && req.method === "POST") {  // Añadir contacto a la agenda.
         saveContact(req, res, contacts, redirectToMainPage);        
     }
     else {
