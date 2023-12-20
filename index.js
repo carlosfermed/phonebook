@@ -2,10 +2,9 @@ const http = require("node:http");
 let contacts = require("./data");
 const getList = require("./getList");
 const deleteContact = require("./delete");
-const redirect = require("./redirect");
+const redirectToMainPage = require("./redirect");
 const getContactForm = require("./getContactForm");
 const queryString = require("querystring");
-const { parse } = require("node:path");
 
 const PORT = process.env.PORT || 3000;
 let idCount = 4;
@@ -17,7 +16,7 @@ http.createServer((req, res) => {
     if (urlParts.includes("delete")) {
         idToDelete = urlParts[2];
         contacts = deleteContact(contacts, idToDelete);
-        redirect(res);
+        redirectToMainPage(res);
     }
     else if (urlParts.includes("new")) {
         res.end(getContactForm(contacts));
@@ -29,21 +28,25 @@ http.createServer((req, res) => {
         res.end(responseBody);
     }
     else if (urlParts.includes("save") && req.method === "POST") {
-        // let body = "";
-        // req.on("data", (data) => {
-        //     body += data;
-        // })
-        // const parsedContact = queryString.parse(body);
-        
-        // const contactToAdd = {
-        //     id: idCount++,
-        //     name: parsedContact.name,
-        //     phone: parsedContact.phone,
-        //     img: parsedContact.image
-        // }
-        // contacts.push(contactToAdd);
-        // redirect(res);
+        let body = "";
+        req.on("data", (data) => {
+            body += data;
+        })
 
+        req.on("end", () => {
+            const parsedContact = queryString.parse(body);
+            
+            const contactToAdd = {
+                id: idCount++,
+                name: parsedContact.name,
+                phone: parsedContact.phone,
+                img: parsedContact.image
+            }
+            contacts.push(contactToAdd);
+            redirectToMainPage(res);
+
+        })
+        
     }
     else {
         res.statusCode = 404;

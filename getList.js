@@ -19,8 +19,9 @@ function getList(data) {
             <th>ID</th><th>Name</th><th>Phone</th><th>Delete</th>            
         </tr>
         ${data.map(createContactItem).join('')}
+        <tr><td><a href="/new">add</a></td></tr>
     </table>
-    <a href="/new">add</a>    
+       
     </body>
     </html>`;
 }
