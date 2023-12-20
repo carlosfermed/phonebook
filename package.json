@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "carlosfermed",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "querystring": "^0.2.1"
+  }
 }

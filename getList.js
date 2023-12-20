@@ -26,7 +26,7 @@ function getList(data) {
 }
 
 function sortContacts(contacts) {
-    contacts.sort( (a, b) => a.name.localeCompare(b.name));
+    contacts.sort( (a, b) => (a.name).localeCompare(b.name));
 }
 
 function createContactItem(contact) {
