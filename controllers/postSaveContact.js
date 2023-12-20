@@ -9,7 +9,9 @@ function saveContact(req, res, contacts, redirect) {
     })
 
     req.on("end", () => {
+        console.log('body :>> ', body);
         const parsedContact = queryString.parse(body);
+        console.log('parsedContact :>> ', parsedContact);
         
         const contactToAdd = {
             id: idCount++,

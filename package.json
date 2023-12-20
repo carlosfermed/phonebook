@@ -1,7 +1,7 @@
 {
   "name": "phonebook",
   "version": "1.0.0",
-  "description": "Store your contacts in this minimalist book",
+  "description": "Store your contacts in a minimalist phonebook",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -10,6 +10,7 @@
   "author": "carlosfermed",
   "license": "ISC",
   "dependencies": {
+    "formidable": "^3.5.1",
     "querystring": "^0.2.1"
   }
 }
