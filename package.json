@@ -1,0 +1,12 @@
+{
+  "name": "phonebook",
+  "version": "1.0.0",
+  "description": "Store your contacts in this minimalist book",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "carlosfermed",
+  "license": "ISC"
+}
