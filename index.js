@@ -1,52 +1,30 @@
 const http = require("node:http");
-let contacts = require("./data");
-const getList = require("./getList");
-const deleteContact = require("./delete");
-const redirectToMainPage = require("./redirect");
-const getContactForm = require("./getContactForm");
-const queryString = require("querystring");
+let contacts = require("./data/data");
+const getList = require("./controllers/getList");
+const deleteContact = require("./util/delete");
+const redirectToMainPage = require("./util/redirect");
+const getContactForm = require("./controllers/getContactForm");
+const saveContact = require("./controllers/postSaveContact");
 
 const PORT = process.env.PORT || 3000;
-let idCount = 4;
 
 http.createServer((req, res) => {
 
     const urlParts = req.url.split("/");
 
     if (urlParts.includes("delete")) {
-        idToDelete = urlParts[2];
-        contacts = deleteContact(contacts, idToDelete);
+        contacts = deleteContact(contacts, urlParts[2]);
         redirectToMainPage(res);
     }
     else if (urlParts.includes("new")) {
         res.end(getContactForm(contacts));
     }
     else if (req.url === "/") {
-        res.statusCode = 200;
-        res.setHeader("content-type", "text/html");    
-        const responseBody = getList(contacts);    
-        res.end(responseBody);
+        res.writeHead(200, "content-type", "text/html");  
+        res.end(getList(contacts));
     }
     else if (urlParts.includes("save") && req.method === "POST") {
-        let body = "";
-        req.on("data", (data) => {
-            body += data;
-        })
-
-        req.on("end", () => {
-            const parsedContact = queryString.parse(body);
-            
-            const contactToAdd = {
-                id: idCount++,
-                name: parsedContact.name,
-                phone: parsedContact.phone,
-                img: parsedContact.image
-            }
-            contacts.push(contactToAdd);
-            redirectToMainPage(res);
-
-        })
-        
+        saveContact(req, res, contacts, redirectToMainPage);        
     }
     else {
         res.statusCode = 404;
