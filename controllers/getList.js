@@ -10,6 +10,7 @@ function getList(data) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css" />
         <title>PhoneBook</title>
     </head>
     <body>
@@ -19,7 +20,7 @@ function getList(data) {
             <th>ID</th><th>Name</th><th>Phone</th><th>Delete</th>            
         </tr>
         ${data.map(createContactItem).join('')}
-        <tr><td><a href="/new">add</a></td></tr>
+        <tr><td><a href="/new" id="addButton">add</a></td></tr>
     </table>
        
     </body>

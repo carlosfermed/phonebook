@@ -1,6 +1,6 @@
-const queryString = require("querystring");
+const queryString = require("querystring"); // Uso de librería de terceros.
 
-let idCount = 4;    // Introducimos el valor 4 dado que la agenda tiene 3 contactos por defecto.
+let idCount = 4;    // Comenzamos con el valor 4 dado que la agenda tiene 3 contactos por defecto.
 
 function saveContact(req, res, contacts, redirect) {
     let body = "";

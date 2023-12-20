@@ -2,6 +2,7 @@ const http = require("node:http");
 let contacts = require("./data/data");
 const {getList, getContactForm, saveContact} = require("./controllers");
 const {deleteContact, redirectToMainPage} = require("./util");
+const { readFileSync } = require("node:fs");
 
 const PORT = process.env.PORT || 3000;
 
@@ -22,6 +23,11 @@ http.createServer((req, res) => {
     }
     else if (urlParts.includes("save") && req.method === "POST") {  // Añadir contacto a la agenda.
         saveContact(req, res, contacts, redirectToMainPage);        
+    }
+    else if (req.url === "/styles.css") {                           // Servir archivo de estilos.
+        const data = readFileSync("./public/styles.css");
+        res.writeHead(200, {"content-type": "text/css"});
+        res.end(data);
     }
     else {
         res.statusCode = 404;
