@@ -11,7 +11,7 @@ function getContactForm(contacts) {
         </head>
         <body>
             <h1>Add Contact info</h1>   
-            <form action="/save" method="post">
+            <form action="/save" method="post" enctype="multipart/form-data">
                 <label for="name">Name</label><input type="text" name="name" id="name"/><br><br>
                 <label for="phone">Phone</label><input type="text" name="phone" id="phone"/><br><br>
                 <label for="image">Image</label><input type="file" name="image" id="image"/><br><br>

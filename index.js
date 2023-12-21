@@ -6,12 +6,13 @@ const { readFileSync } = require("node:fs");
 
 const PORT = process.env.PORT || 3000;
 
-http.createServer((req, res) => {
+http.createServer((req, res) => {  
 
     const urlParts = req.url.split("/");
 
-    if (urlParts.includes("delete")) {                              // Borrar contacto.
+    if (urlParts.includes("delete")) {                              // Borrar contacto.                                     
         contacts = deleteContact(contacts, urlParts[2]);
+                       // Contactos ^^^^    ^^^^ Índice del array de contactos.
         redirectToMainPage(res);
     }
     else if (urlParts.includes("new")) {                            // Servir formulario para añadir contacto.
