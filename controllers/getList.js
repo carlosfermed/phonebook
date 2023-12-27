@@ -1,4 +1,4 @@
-// const contacts = require("./contacts");
+const fs = require("node:fs");
 
 function getList(data) {
 
@@ -17,7 +17,7 @@ function getList(data) {
         <h1>The Minimalist PhoneBook</h1> 
         <table>
         <tr>
-            <th>ID</th><th>Name</th><th>Phone</th><th>Delete</th>            
+            <th>Image</th><th>ID</th><th>Name</th><th>Phone</th><th>Delete</th>            
         </tr>
         ${data.map(createContactItem).join('')}
         <tr><td><a href="/new" id="addButton">add</a></td></tr>
@@ -36,7 +36,8 @@ function sortContacts(contacts) {
 }
 
 function createContactItem(contact) {
-    return `<tr><td>${contact.id}</td><td>${contact.name}</td><td>${contact.phone}</td><td><a href=/delete/${contact.id}>delete</a></tr>`;
+    return `<tr><td><img src="public/img/${contact.image}" alt="Imagen personal"></img></td><td>${contact.id}</td><td>${contact.name}</td><td>${contact.phone}</td><td><a href="/delete/${contact.id}">delete</a></tr>`;
 }
+
 
 module.exports = getList;

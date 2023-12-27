@@ -6,13 +6,11 @@ let idCount = 4;
 function saveContact(req, res, contacts, redirect) {
 
     const form = new formidable.IncomingForm({  // formidable ya maneja los eventos "data" y "end".
-        uploadDir: __dirname + '/public/img'
+        uploadDir: 'C:\\Users\\user\\Desktop\\phonebook\\public\\img'
     }); 
     try {
-
         form.parse(req, (err, contacto, files) => {
             if (err) {
-                console.log('err :>> ', err);
                 res.writeHead(500, { 'Content-Type': 'text/plain' });
                 res.end('Error interno del servidor');
                 return
@@ -22,11 +20,12 @@ function saveContact(req, res, contacts, redirect) {
                 // `fields` contiene los datos del formulario (name, phone).
                 // `files` contiene los archivos (en este caso, `image`).
 
+                // console.log("fileName -> ", files.image[0].newFilename);
                 const contactToAdd = {
                     id: idCount++,
                     name: contacto.name[0],
                     phone: contacto.phone[0],
-                    image: `/public/img/${files.image[0].originalFilename}`
+                    image: files.image[0].newFilename
                 }
                 console.log("^^^^^^^^^^^^^^^^^^")
                 console.log('contactToAdd con foto :>> ', contactToAdd);
@@ -40,6 +39,8 @@ function saveContact(req, res, contacts, redirect) {
                     phone: contacto.phone[0],
                     image: ""
                 }
+                console.log('contactToAdd con foto :>> ', contactToAdd);
+
                 contacts.push(contactToAdd);
                 redirect(res);
             }          

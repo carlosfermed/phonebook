@@ -30,6 +30,10 @@ http.createServer((req, res) => {
         res.writeHead(200, {"content-type": "text/css"});
         res.end(data);
     }
+    else if (urlParts.includes("public")) {
+        console.log("urlParts", urlParts);
+        res.end(readFileSync(`./public/img/${urlParts[3]}`))
+    }
     else {
         res.statusCode = 404;
         res.setHeader("content-type", "text/plain");    
