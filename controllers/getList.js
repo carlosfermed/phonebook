@@ -36,8 +36,7 @@ function sortContacts(contacts) {
 }
 
 function createContactItem(contact) {
-    return `<tr><td><img src="public/img/${contact.image}" alt="Imagen personal"></img></td><td>${contact.id}</td><td>${contact.name}</td><td>${contact.phone}</td><td><a href="/delete/${contact.id}">delete</a></tr>`;
+    return `<tr><td><img src="public/img/${contact.image}" alt="Sin imagen"></img></td><td>${contact.id}</td><td>${contact.name}</td><td>${contact.phone}</td><td><a href="/delete/${contact.id}">delete</a></tr>`;
 }
-
 
 module.exports = getList;
