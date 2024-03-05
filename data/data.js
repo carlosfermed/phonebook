@@ -1,3 +1,5 @@
+
+// Default contacts.
 const contacts = [
     {
         id: 1,

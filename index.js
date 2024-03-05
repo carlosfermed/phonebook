@@ -10,27 +10,27 @@ http.createServer((req, res) => {
 
     const urlParts = req.url.split("/");
 
-    if (urlParts.includes("delete")) {                              // Borrar contacto.                              
-        contacts = deleteContact(contacts, urlParts[2]);            // deleteContact(lista_de_Contactos, id_del_contacto)                       
+    if (urlParts.includes("delete")) {                              // Delete contact.                              
+        contacts = deleteContact(contacts, urlParts[2]);                                 
         redirectToMainPage(res);
     }
-    else if (urlParts.includes("new")) {                            // Servir formulario para añadir contacto.
+    else if (urlParts.includes("new")) {                            // Serve form to add contact.
         res.end(getContactForm(contacts));
     }
     
-    else if (urlParts.includes("save") && req.method === "POST") {  // Añadir contacto a la agenda.
+    else if (urlParts.includes("save") && req.method === "POST") {  // Add contact to the app.
         saveContact(req, res, contacts, redirectToMainPage);        
     }
-    else if (req.url === "/") {                                     // Servir página principal.
+    else if (req.url === "/") {                                     // Serve main page.
         res.writeHead(200, "content-type", "text/html");  
         res.end(getList(contacts));
     }
-    else if (req.url === "/styles.css") {                           // Servir archivo de estilos.
+    else if (req.url === "/styles.css") {                           // Serve style file.
         const data = readFileSync("./public/styles.css");
         res.writeHead(200, {"content-type": "text/css"});
         res.end(data);
     }
-    else if (urlParts.includes("public")) {                         // Servir foto en caso de que exista.
+    else if (urlParts.includes("public")) {                         // Provide photo if it exists.
         res.end(readFileSync(`./public/img/${urlParts[3]}`))
     }
     else {

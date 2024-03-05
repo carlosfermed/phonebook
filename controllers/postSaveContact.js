@@ -1,14 +1,15 @@
-const formidable = require("formidable");                               // Uso de librería de terceros.
 
-// Comenzamos con el valor 4 ya que hemos introducido 3 contactos por defecto.
-let idCount = 4;    
+const formidable = require("formidable");                               // Use of third-party library.
+
+
+let idCount = 4;                                                        // We start with the 4 value since we have entered 3 contacts by default.
 
 function saveContact(req, res, contacts, redirect) {
 
-    const form = new formidable.IncomingForm({                          // 'formidable' ya maneja los eventos "data" y "end".
-        uploadDir: 'C:\\Users\\user\\Desktop\\phonebook\\public\\img',  // Directorio de guardado de las imagenes.
-        allowEmptyFiles: true,                                          // Permite que no sea necesario subir una imagen.
-        minFileSize: 0                                                  // Al no ser obligatorio subir imagenes es necesario anotar 0 en esta propiedad.
+    const form = new formidable.IncomingForm({                          // 'formidable' already handles the "data" and "end" events.
+        uploadDir: 'C:\\Users\\user\\Desktop\\phonebook\\public\\img',  // Image saving directory.
+        allowEmptyFiles: true,                                          // It allows to not have to upload an image.
+        minFileSize: 0                                                  // Since it is not mandatory to upload images, it is necessary to write 0 in this property.
     }); 
     try {
         form.parse(req, (err, contacto, files) => {
@@ -25,8 +26,6 @@ function saveContact(req, res, contacts, redirect) {
                     phone: contacto.phone[0],
                     image: files.image[0].newFilename
                 }
-                console.log("^^^^^^^^^^^^^^^^^^")
-                console.log('contactToAdd con foto :>> ', contactToAdd);
                 contacts.push(contactToAdd);
                 redirect(res);
             }  

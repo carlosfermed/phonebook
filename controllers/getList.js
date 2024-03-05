@@ -29,14 +29,13 @@ function getList(data) {
 
 function sortContacts(contacts) {
     contacts.sort( (a, b) => {
-        // console.log('a.name :>> ', a.name);
-        // console.log('b.name :>> ', b.name);
         return (a.name).localeCompare(b.name)
     });
 }
 
 function createContactItem(contact) {
-    return `<tr><td><img src="public/img/${contact.image}" alt="Sin imagen"></img></td><td>${contact.id}</td><td>${contact.name}</td><td>${contact.phone}</td><td><a href="/delete/${contact.id}">delete</a></tr>`;
+    return `<tr><td><img src="public/img/${contact.image}" alt="Sin imagen"></img></td><td>${contact.id}</td>
+        <td>${contact.name}</td><td>${contact.phone}</td><td><a href="/delete/${contact.id}">delete</a></tr>`;
 }
 
 module.exports = getList;
